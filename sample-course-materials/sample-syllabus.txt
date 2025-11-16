@@ -1,0 +1,69 @@
+Introduction to Computer Science - CS 101
+Fall 2025
+
+Instructor: Dr. Jane Smith
+Email: jane.smith@university.edu
+Office: Room 301, Computer Science Building
+Office Hours: Tuesdays 2:00 PM - 4:00 PM, Thursdays 3:00 PM - 5:00 PM
+
+Course Description:
+This course provides an introduction to computer science fundamentals, including programming, algorithms, data structures, and computational thinking. Students will learn to write programs in Python and develop problem-solving skills.
+
+Learning Objectives:
+- Understand fundamental programming concepts
+- Develop algorithmic thinking skills
+- Learn basic data structures (arrays, lists, trees)
+- Understand computational complexity
+- Apply problem-solving techniques to real-world problems
+
+Grading Policy:
+- Assignments: 40%
+- Midterm Exam: 25%
+- Final Exam: 25%
+- Participation: 10%
+
+Late Submission Policy:
+Late submissions will receive a 10% deduction per day, up to 3 days. After 3 days, assignments will not be accepted.
+
+Important Dates:
+- First Day of Class: September 5, 2025
+- Midterm Exam: October 20, 2025
+- Last Day to Withdraw: November 15, 2025
+- Final Exam: December 15, 2025, 2:00 PM - 5:00 PM
+
+Assignment Schedule:
+1. Assignment 1 - Python Basics: Due September 20, 2025, 11:59 PM EST
+2. Assignment 2 - Control Flow: Due September 27, 2025, 11:59 PM EST
+3. Assignment 3 - Functions: Due October 4, 2025, 11:59 PM EST
+4. Assignment 4 - Data Structures: Due October 18, 2025, 11:59 PM EST
+5. Assignment 5 - Algorithms: Due November 8, 2025, 11:59 PM EST
+6. Assignment 6 - Final Project Proposal: Due November 20, 2025, 11:59 PM EST
+7. Final Project: Due December 10, 2025, 11:59 PM EST
+
+Course Topics by Week:
+Week 1-2: Introduction to Python, Variables, Data Types
+Week 3-4: Control Flow (if/else, loops)
+Week 5-6: Functions and Modules
+Week 7-8: Data Structures (Lists, Dictionaries, Sets)
+Week 9: Midterm Review and Exam
+Week 10-11: Object-Oriented Programming
+Week 12-13: Algorithms and Complexity
+Week 14: File I/O and Error Handling
+Week 15: Final Project Presentations
+
+Required Materials:
+- Textbook: "Python Programming: An Introduction to Computer Science" by John Zelle
+- Python 3.9 or later installed on your computer
+- Access to Canvas LMS for assignments and materials
+
+Academic Integrity:
+All work submitted must be your own. Collaboration is encouraged for learning, but all code submitted must be written individually. Plagiarism will result in a zero for the assignment and may lead to further disciplinary action.
+
+Attendance Policy:
+Attendance is expected but not mandatory. However, participation points require active engagement in class discussions and activities.
+
+Accessibility:
+Students requiring accommodations should contact the Office of Disability Services and provide documentation to the instructor within the first two weeks of class.
+
+Contact Information:
+For questions about course content, email the instructor or attend office hours. For technical issues with Canvas, contact IT support at support@university.edu.

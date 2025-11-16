@@ -124,26 +124,38 @@ const InstructorDashboard = ({ courseData, setCourseData, setView }) => {
 
     setIsProcessing(true);
 
-    // Simulate file processing (in real implementation, this would call Claude API)
-    setTimeout(() => {
-      const mockProcessedData = {
-        courseName: courseName,
-        instructorName: instructorName || 'Not specified',
-        files: uploadedFiles.map(f => f.name),
-        totalFiles: uploadedFiles.length,
-        processedAt: new Date().toISOString(),
-        content: {
-          syllabus: 'Course syllabus content...',
-          assignments: ['Assignment 1', 'Assignment 2', 'Assignment 3'],
-          policies: 'Course policies and guidelines...',
-          schedule: 'Course schedule information...'
-        }
-      };
-      
-      setProcessedData(mockProcessedData);
-      setCourseData(mockProcessedData);
+    try {
+      // Create FormData for file upload
+      const formData = new FormData();
+      formData.append('courseName', courseName);
+      formData.append('instructorName', instructorName);
+
+      // Add all files to FormData
+      uploadedFiles.forEach(fileObj => {
+        formData.append('files', fileObj.file);
+      });
+
+      // Call backend API
+      const response = await fetch('http://localhost:5000/api/process-course', {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Failed to process files');
+      }
+
+      const processedData = await response.json();
+
+      setProcessedData(processedData);
+      setCourseData(processedData);
       setIsProcessing(false);
-    }, 2000);
+    } catch (error) {
+      console.error('Error processing files:', error);
+      alert('Error processing files: ' + error.message);
+      setIsProcessing(false);
+    }
   };
 
   const downloadJSON = () => {
@@ -417,23 +429,55 @@ const StudentChatbot = ({ courseData, setView }) => {
       timestamp: new Date()
     };
 
-    setMessages([...messages, userMessage]);
+    const updatedMessages = [...messages, userMessage];
+    setMessages(updatedMessages);
     setInputMessage('');
     setIsTyping(true);
 
-    // Simulate AI response (in production, this would call Claude API)
-    setTimeout(() => {
+    try {
+      // Call backend API
+      const response = await fetch('http://localhost:5000/api/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          message: inputMessage,
+          courseData: courseData,
+          conversationHistory: updatedMessages.filter(m => m.role !== 'system')
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to get response from server');
+      }
+
+      const data = await response.json();
+
       const aiMessage = {
         id: Date.now() + 1,
         role: 'assistant',
-        content: courseData 
+        content: data.response,
+        timestamp: new Date()
+      };
+
+      setMessages(prev => [...prev, aiMessage]);
+      setIsTyping(false);
+    } catch (error) {
+      console.error('Error sending message:', error);
+
+      // Fallback to mock response if API fails
+      const aiMessage = {
+        id: Date.now() + 1,
+        role: 'assistant',
+        content: courseData
           ? `Based on the course materials for ${courseData.courseName}, here's what I found:\n\n${generateMockResponse(inputMessage)}`
-          : `I'd be happy to help! However, the course materials haven't been uploaded yet. Please ask the instructor to upload the course content so I can provide specific information about assignments, deadlines, and policies.`,
+          : `I'd be happy to help! However, I'm having trouble connecting to the server. Please make sure the backend is running on http://localhost:5000`,
         timestamp: new Date()
       };
       setMessages(prev => [...prev, aiMessage]);
       setIsTyping(false);
-    }, 1500);
+    }
   };
 
   const generateMockResponse = (question) => {
